@@ -31,9 +31,6 @@ public class Viaggio {
     @Column(nullable = false)
     private boolean completato;
 
-    @ManyToOne
-    @JoinColumn(name = "dipendente_id")
-    private Dipendente dipendente;
 
     public Viaggio(String destinazione, LocalDate dataPartenza, boolean completato) {
         this.destinazione = destinazione;

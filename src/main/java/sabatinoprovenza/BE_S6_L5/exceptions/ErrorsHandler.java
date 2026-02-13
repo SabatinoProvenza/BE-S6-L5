@@ -17,6 +17,11 @@ public class ErrorsHandler {
         return new ErrorsWithList("Errore di validazione", ex.getErrorsList());
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorsPayload handleBadRequest(BadRequestException ex) {
+        return new ErrorsPayload(ex.getMessage());
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
