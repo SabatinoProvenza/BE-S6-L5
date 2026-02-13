@@ -4,12 +4,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import sabatinoprovenza.BE_S6_L5.entities.Dipendente;
 import sabatinoprovenza.BE_S6_L5.exceptions.ValidationExceptions;
 import sabatinoprovenza.BE_S6_L5.payloads.DipendenteDTO;
 import sabatinoprovenza.BE_S6_L5.services.DipendenteService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/dipendenti")
@@ -37,5 +39,11 @@ public class DipendenteController {
             return this.dipendenteService.create(payload);
         }
 
+    }
+
+    @PatchMapping("/{dipendenteId}/avatar")
+    public Dipendente uploadAvatar(@PathVariable UUID dipendenteId,
+                                   @RequestParam("profile_picture") MultipartFile file) {
+        return dipendenteService.uploadAvatar(file, dipendenteId);
     }
 }

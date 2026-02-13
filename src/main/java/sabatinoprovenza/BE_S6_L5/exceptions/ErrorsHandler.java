@@ -23,6 +23,13 @@ public class ErrorsHandler {
         return new ErrorsPayload(ex.getMessage());
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorsPayload handleNotFound(NotFoundException ex) {
+        return new ErrorsPayload(ex.getMessage());
+    }
+
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorsPayload handleGeneric(Exception ex) {
