@@ -14,7 +14,7 @@ public class ViaggioService {
     }
 
     public Viaggio create(ViaggioDTO v) {
-        Viaggio viaggio = new Viaggio(v.destinazione(), v.data(), v.completato());
+        Viaggio viaggio = new Viaggio(v.destinazione(), v.data(), v.stato());
         return this.viaggioRepository.save(viaggio);
     }
 }

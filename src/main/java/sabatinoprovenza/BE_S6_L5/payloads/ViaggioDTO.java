@@ -12,7 +12,8 @@ public record ViaggioDTO(
         @NotNull(message = "Data obbligatoria")
         LocalDate data,
 
-        boolean completato
+        @NotBlank(message = "Stato obbligatorio")
+        String stato
 ) {
-    
+
 }

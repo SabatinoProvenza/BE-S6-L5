@@ -30,16 +30,16 @@ public class Prenotazione {
     private Dipendente dipendente;
 
     @Column(name = "data_richiesta", nullable = false)
-    private LocalDate dataRichiesta;
+    private LocalDate dataPartenza;
 
     @Column(columnDefinition = "TEXT")
     private String preferenze;
 
 
-    public Prenotazione(Viaggio viaggio, Dipendente dipendente, LocalDate dataRichiesta, String preferenze) {
+    public Prenotazione(Viaggio viaggio, Dipendente dipendente, LocalDate dataPartenza, String preferenze) {
         this.viaggio = viaggio;
         this.dipendente = dipendente;
-        this.dataRichiesta = dataRichiesta;
+        this.dataPartenza = dataPartenza;
         this.preferenze = preferenze;
     }
 }

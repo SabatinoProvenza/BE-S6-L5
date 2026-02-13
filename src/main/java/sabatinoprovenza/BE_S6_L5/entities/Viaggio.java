@@ -27,14 +27,13 @@ public class Viaggio {
     @Column(nullable = false)
     private LocalDate dataPartenza;
 
-    // false = IN_PROGRAMMA, true = COMPLETATO
     @Column(nullable = false)
-    private boolean completato;
+    private String stato;
 
 
-    public Viaggio(String destinazione, LocalDate dataPartenza, boolean completato) {
+    public Viaggio(String destinazione, LocalDate dataPartenza, String stato) {
         this.destinazione = destinazione;
         this.dataPartenza = dataPartenza;
-        this.completato = completato;
+        this.stato = stato;
     }
 }
