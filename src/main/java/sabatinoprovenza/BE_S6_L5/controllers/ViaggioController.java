@@ -6,10 +6,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import sabatinoprovenza.BE_S6_L5.entities.Viaggio;
 import sabatinoprovenza.BE_S6_L5.exceptions.ValidationExceptions;
+import sabatinoprovenza.BE_S6_L5.payloads.StatoViaggioDTO;
 import sabatinoprovenza.BE_S6_L5.payloads.ViaggioDTO;
 import sabatinoprovenza.BE_S6_L5.services.ViaggioService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/viaggi")
@@ -35,5 +37,22 @@ public class ViaggioController {
             return this.viaggioService.create(payload);
         }
     }
+
+    @PatchMapping("/{id}/stato")
+    public Viaggio cambiaStato(@PathVariable UUID id, @RequestBody @Validated StatoViaggioDTO payload, BindingResult validationResult) {
+
+        if (validationResult.hasErrors()) {
+
+            List<String> errorsList = validationResult.getFieldErrors()
+                    .stream()
+                    .map(fieldError -> fieldError.getDefaultMessage())
+                    .toList();
+
+            throw new ValidationExceptions(errorsList);
+        } else {
+            return viaggioService.cambiaStato(id, payload.stato());
+        }
+    }
+
 
 }
