@@ -32,13 +32,17 @@ public class Dipendente {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     private String avatar;
 
-    public Dipendente(String username, String nome, String cognome, String email) {
+    public Dipendente(String username, String nome, String cognome, String email, String password) {
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
+        this.password = password;
         this.avatar = "https://ui-avatars.com/api/?name=" + nome + "+" + cognome;
     }
 }

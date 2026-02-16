@@ -34,7 +34,7 @@ public class DipendenteService {
             throw new BadRequestException("Email già in uso: " + d.email());
         }
 
-        Dipendente dipendente = new Dipendente(d.username(), d.nome(), d.cognome(), d.email());
+        Dipendente dipendente = new Dipendente(d.username(), d.nome(), d.cognome(), d.email(), d.password());
 
         Dipendente dipendenteSalvato = this.dipendenteRepository.save(dipendente);
         System.out.println("Il dipendente con id: " + dipendenteSalvato.getId() + " è stato salvato correttamente!");
