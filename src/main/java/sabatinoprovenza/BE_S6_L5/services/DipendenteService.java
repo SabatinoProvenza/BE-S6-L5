@@ -24,6 +24,11 @@ public class DipendenteService {
         this.cloudinary = cloudinary;
     }
 
+    public Dipendente findByEmail(String email) {
+        return this.dipendenteRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("L'utente con email " + email + " non è stato trovato!"));
+    }
+
     public Dipendente create(DipendenteDTO d) {
 
         if (dipendenteRepository.existsByUsername(d.username())) {
