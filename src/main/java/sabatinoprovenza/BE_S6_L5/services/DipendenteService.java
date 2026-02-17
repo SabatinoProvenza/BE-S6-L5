@@ -12,6 +12,7 @@ import sabatinoprovenza.BE_S6_L5.payloads.DipendenteDTO;
 import sabatinoprovenza.BE_S6_L5.repositories.DipendenteRepository;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -30,6 +31,10 @@ public class DipendenteService {
     public Dipendente findByEmail(String email) {
         return this.dipendenteRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException("L'utente con email " + email + " non è stato trovato!"));
+    }
+
+    public Dipendente findById(UUID id) {
+        return this.dipendenteRepository.findById(id).orElseThrow(() -> new NotFoundException("Il dipendente con id: " + id + " non è stato trovato"));
     }
 
     public Dipendente create(DipendenteDTO d) {
@@ -61,6 +66,9 @@ public class DipendenteService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public List<Dipendente> findAll() {
+        return dipendenteRepository.findAll();
     }
 }

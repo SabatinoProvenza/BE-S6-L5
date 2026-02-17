@@ -1,6 +1,7 @@
 package sabatinoprovenza.BE_S6_L5.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,6 @@ public class DipendenteController {
         this.dipendenteService = dipendenteService;
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Dipendente create(@RequestBody @Validated DipendenteDTO payload, BindingResult validationResult) {
@@ -38,7 +38,12 @@ public class DipendenteController {
         } else {
             return this.dipendenteService.create(payload);
         }
+    }
 
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<Dipendente> getAll() {
+        return dipendenteService.findAll();
     }
 
     @PatchMapping("/{dipendenteId}/avatar")
