@@ -2,6 +2,7 @@ package sabatinoprovenza.BE_S6_L5.services;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import sabatinoprovenza.BE_S6_L5.entities.Dipendente;
@@ -18,10 +19,12 @@ import java.util.UUID;
 public class DipendenteService {
     private final DipendenteRepository dipendenteRepository;
     private final Cloudinary cloudinary;
+    private final PasswordEncoder passwordEncoder;
 
-    public DipendenteService(DipendenteRepository dipendenteRepository, Cloudinary cloudinary) {
+    public DipendenteService(DipendenteRepository dipendenteRepository, Cloudinary cloudinary, PasswordEncoder passwordEncoder) {
         this.dipendenteRepository = dipendenteRepository;
         this.cloudinary = cloudinary;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Dipendente findByEmail(String email) {
@@ -39,7 +42,7 @@ public class DipendenteService {
             throw new BadRequestException("Email già in uso: " + d.email());
         }
 
-        Dipendente dipendente = new Dipendente(d.username(), d.nome(), d.cognome(), d.email(), d.password());
+        Dipendente dipendente = new Dipendente(d.username(), d.nome(), d.cognome(), d.email(), passwordEncoder.encode(d.password()));
 
         Dipendente dipendenteSalvato = this.dipendenteRepository.save(dipendente);
         System.out.println("Il dipendente con id: " + dipendenteSalvato.getId() + " è stato salvato correttamente!");
